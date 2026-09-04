@@ -1,0 +1,21 @@
+{
+  "name": "x-media-archive-companion",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Desktop-only, offline importer for X Media Clone archive jobs.",
+  "scripts": {
+    "build": "node esbuild.config.mjs production",
+    "dev": "node esbuild.config.mjs",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "check": "tsc --noEmit",
+    "cleanup:navigation": "node --experimental-strip-types scripts/post-navigation-cleanup.ts",
+    "migration:public": "node --experimental-strip-types scripts/public-distribution-migration.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "esbuild": "^0.25.0",
+    "obsidian": "^1.8.7",
+    "typescript": "^5.8.3"
+  }
+}

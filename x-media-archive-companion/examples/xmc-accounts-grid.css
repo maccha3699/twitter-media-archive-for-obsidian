@@ -1,0 +1,81 @@
+/* ============================================
+   XMC アカウント一覧グリッド
+   XMediaArchive/_accounts/ のカードだけを写真タイル化する。
+   他のフォルダの見た目には影響しない（:has で対象コンテナを限定）。
+   ============================================ */
+
+/* --- グリッド全体: タイルを小さめにして列数を増やす --- */
+.ge-grid-container:has(> [data-file-path^="XMediaArchive/_accounts/"]) {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+/* --- カード: 画像を上、テキストを下の縦積みにする --- */
+.ge-grid-container:has(> [data-file-path^="XMediaArchive/_accounts/"])
+  .ge-grid-item[data-file-path^="XMediaArchive/_accounts/"] {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  height: auto;
+  overflow: hidden;
+  border-top-width: 1px;          /* cosense-grid の黄色い太帯を消す */
+  border-top-color: var(--background-modifier-border);
+  border-radius: 8px;
+}
+
+/* --- 画像: カード幅いっぱい、上に配置 --- */
+.ge-grid-container:has(> [data-file-path^="XMediaArchive/_accounts/"])
+  .ge-grid-item[data-file-path^="XMediaArchive/_accounts/"] .ge-image-area {
+  order: 0;
+  width: 100% !important;
+  height: 260px !important;
+  flex-shrink: 0;
+}
+
+.ge-grid-container:has(> [data-file-path^="XMediaArchive/_accounts/"])
+  .ge-grid-item[data-file-path^="XMediaArchive/_accounts/"] .ge-image-area img,
+.ge-grid-container:has(> [data-file-path^="XMediaArchive/_accounts/"])
+  .ge-grid-item[data-file-path^="XMediaArchive/_accounts/"] .ge-image-area video {
+  border-radius: 0;
+  object-position: top center;    /* 顔が上寄りの絵が多いので上を優先 */
+}
+
+/* --- テキスト: 画像の下、余白は詰める --- */
+.ge-grid-container:has(> [data-file-path^="XMediaArchive/_accounts/"])
+  .ge-grid-item[data-file-path^="XMediaArchive/_accounts/"] .ge-content-area {
+  order: 1;
+  padding: 8px 10px 10px;
+  gap: 2px;
+}
+
+/* --- タイトル: 2行で打ち切り。cosense-grid の min-height を打ち消す --- */
+.ge-grid-container:has(> [data-file-path^="XMediaArchive/_accounts/"])
+  .ge-grid-item[data-file-path^="XMediaArchive/_accounts/"] .ge-title {
+  min-height: 0 !important;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* --- 要約: 1行、控えめに --- */
+.ge-grid-container:has(> [data-file-path^="XMediaArchive/_accounts/"])
+  .ge-grid-item[data-file-path^="XMediaArchive/_accounts/"] .ge-content-area p,
+.ge-grid-container:has(> [data-file-path^="XMediaArchive/_accounts/"])
+  .ge-grid-item[data-file-path^="XMediaArchive/_accounts/"] .ge-content-area-p-field {
+  margin: 0;
+  font-size: 0.72rem;
+  opacity: 0.65;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- 画像が無いアカウント: 空白にせず引用ブロックを見せる --- */
+.ge-grid-container:has(> [data-file-path^="XMediaArchive/_accounts/"])
+  .ge-grid-item[data-file-path^="XMediaArchive/_accounts/"]:not(:has(.ge-image-area)) {
+  border-top: 3px solid var(--text-faint);
+}

@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "X Media Clone",
+  "version": "0.2.2",
+  "minimum_chrome_version": "111",
+  "permissions": ["downloads", "storage", "unlimitedStorage"],
+  "host_permissions": ["*://x.com/*", "*://*.x.com/*", "*://twitter.com/*", "*://*.twitter.com/*"],
+  "background": { "service_worker": "sw.js", "type": "module" },
+  "content_scripts": [
+    { "js": ["inject.js"],  "matches": ["*://x.com/*", "*://twitter.com/*", "*://mobile.x.com/*", "*://mobile.twitter.com/*"], "run_at": "document_start", "world": "MAIN" },
+    { "js": ["content.js"], "matches": ["*://x.com/*", "*://twitter.com/*", "*://mobile.x.com/*", "*://mobile.twitter.com/*"], "run_at": "document_start" }
+  ],
+  "web_accessible_resources": [
+    { "resources": ["content_main.js", "lib/*.js"], "matches": ["*://x.com/*", "*://twitter.com/*", "*://mobile.x.com/*", "*://mobile.twitter.com/*"] }
+  ]
+}
