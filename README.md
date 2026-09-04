@@ -4,7 +4,7 @@
 
 本リポジトリのREADMEとコードは、すべてOpenAI GPT-5.6によるバイブコーディングで作成されました。
 
-X（旧Twitter）から表示済み投稿のメディアをダウンロードし、ローカルのObsidian Vaultへ保存するツールです。Chrome拡張 **X Media Collector（XMC）** とObsidianプラグイン **X Media Archive Companion** を一組で使用します。
+Twitter（現:X）のツイート(現:ポスト)からメディアをダウンロードし、ローカルのObsidian Vaultへ保存するツールです。Chrome拡張 **X Media Collector（XMC）** とObsidianプラグイン **X Media Archive Companion** を一組で使用します。
 
 Windows、Chrome 111以降、Obsidian Desktop 1.5以降向けのPublic previewです。
 
