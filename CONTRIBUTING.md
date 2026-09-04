@@ -8,7 +8,7 @@ IssueとPull Requestを受け付けます。Issues and pull requests are welcome
 4. Companionの`src/`を変更した場合は`npm run build`後の`main.js`も含めてください。When changing Companion source, commit the rebuilt `main.js`.
 
 ```powershell
-cd x-media-clone
+cd x-media-collector
 node --test tests/*.test.js
 
 cd ..\x-media-archive-companion

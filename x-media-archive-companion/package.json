@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Desktop-only, offline importer for X Media Clone archive jobs.",
+  "description": "Desktop-only, offline importer for X Media Collector archive jobs.",
   "scripts": {
     "build": "node esbuild.config.mjs production",
     "dev": "node esbuild.config.mjs",

@@ -17,8 +17,8 @@ jobs:
           node-version: 24
           cache: npm
           cache-dependency-path: x-media-archive-companion/package-lock.json
-      - name: Test X Media Clone
-        working-directory: x-media-clone
+      - name: Test X Media Collector
+        working-directory: x-media-collector
         run: node --test tests/*.test.js
       - name: Install Companion dependencies
         working-directory: x-media-archive-companion

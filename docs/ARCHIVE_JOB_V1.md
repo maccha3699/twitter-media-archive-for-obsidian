@@ -1,6 +1,6 @@
 # ArchiveJob v1
 
-X Media Clone（producer）とX Media Archive Companion（consumer）の唯一の受渡し契約です。
+X Media Collector（producer）とX Media Archive Companion（consumer）の唯一の受渡し契約です。
 
 ## Job
 

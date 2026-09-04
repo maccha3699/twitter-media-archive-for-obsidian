@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "X Media Clone",
+  "name": "X Media Collector",
   "version": "0.2.2",
   "minimum_chrome_version": "111",
   "permissions": ["downloads", "storage", "unlimitedStorage"],

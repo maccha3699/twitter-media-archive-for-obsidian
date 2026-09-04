@@ -3,7 +3,7 @@
   "name": "X Media Archive Companion",
   "version": "0.1.0",
   "minAppVersion": "1.5.0",
-  "description": "Offline desktop importer for completed X Media Clone archive jobs.",
+  "description": "Offline desktop importer for completed X Media Collector archive jobs.",
   "author": "maccha3699",
   "isDesktopOnly": true
 }

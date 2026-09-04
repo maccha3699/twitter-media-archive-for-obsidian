@@ -1,4 +1,4 @@
-# X Media Clone
+# X Media Collector
 
 このREADMEとコードは、すべてOpenAI GPT-5.6によるバイブコーディングで作成されました。
 This README and all code were created through vibe coding with OpenAI GPT-5.6.
@@ -68,7 +68,7 @@ user nodeの形状は2026-08にXが変更しました。`legacy`ブロックは�
 
 ## 導入
 
-`chrome://extensions` でデベロッパーモードを有効にし、この `x-media-clone` ディレクトリを読み込むか、既存項目を再読み込みします。比較用 `2.0.7_0` を読み込まないでください。
+`chrome://extensions` でデベロッパーモードを有効にし、この `x-media-collector` ディレクトリを読み込むか、既存項目を再読み込みします。
 
 ## テスト
 
