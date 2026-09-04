@@ -12,6 +12,53 @@ Windows、Chrome 111以降、Obsidian Desktop 1.5以降向けのPublic preview�
 
 Public preview for Windows, Chrome 111 or later, and Obsidian Desktop 1.5 or later.
 
+## リポジトリ構成 / Repository layout
+
+```text
+x-media-archive-suite/
+├─ x-media-clone/                  Chrome extension source and tests
+├─ x-media-archive-companion/      Obsidian plugin source, build, and tests
+├─ docs/ARCHIVE_JOB_V1.md          XMC → Companion data contract
+├─ test-fixtures/                  Shared synthetic contract fixtures
+├─ .github/workflows/test.yml      Pull Request checks
+├─ CONTRIBUTING.md
+└─ LICENSE
+```
+
+`x-media-clone`の`manifest.json`をChromeが読みます。`x-media-archive-companion`の`main.js`、`manifest.json`、`styles.css`がObsidianで実行される配布ファイルです。
+
+Chrome loads `x-media-clone/manifest.json`. Obsidian runs `main.js`, `manifest.json`, and `styles.css` from `x-media-archive-companion`.
+
+## ファイル・データ構造 / File and data layout
+
+```text
+X page
+  ↓ X Media Clone
+Chrome IndexedDB                         operational ledger
+  ↓
+~/Downloads/XMediaClone/_jobs/<jobId>/   temporary handoff
+├─ media/
+└─ _manifest/<attemptUuid>/
+   ├─ manifest-0001.json ...
+   └─ complete.json
+  ↓ X Media Archive Companion
+<Vault>/XMediaArchive/                   durable archive
+├─ <authorFolder>/
+│  ├─ _profile.md
+│  ├─ <authorFolder>.md
+│  └─ <post>.md
+├─ _media/<authorFolder>/
+├─ _accounts/
+└─ _system/
+   ├─ profiles.json
+   ├─ receipts/<jobId>.json
+   └─ diagnostic.log
+```
+
+Chrome IndexedDBは重複防止用の操作台帳、`_jobs`は取込前の一時受渡し領域、Vaultの`XMediaArchive`が恒久データです。jobのmanifestにCookieやtokenは入りません。投稿ノートでは`<!--xmc:user-->`より後が利用者領域で、再取込時も保持されます。詳細なjob形式は[`docs/ARCHIVE_JOB_V1.md`](docs/ARCHIVE_JOB_V1.md)にあります。
+
+Chrome IndexedDB is the operational deduplication ledger, `_jobs` is temporary handoff storage, and the Vault's `XMediaArchive` is the durable archive. Job manifests contain no cookies or tokens. In post notes, content after `<!--xmc:user-->` belongs to the user and is preserved during re-import. See [`docs/ARCHIVE_JOB_V1.md`](docs/ARCHIVE_JOB_V1.md) for the job contract.
+
 ## 日本語
 
 ### インストール
