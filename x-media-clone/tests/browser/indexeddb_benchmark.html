@@ -1,0 +1,113 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>XMC IndexedDB benchmark</title>
+<pre id="result">running</pre>
+<script>
+(async () => {
+const params = new URLSearchParams(location.search);
+const count = Math.max(1, Number(params.get("count")) || 100000);
+const samples = Math.min(200, count);
+const dbName = `xmc-ledger-benchmark-${count}-${Date.now()}`;
+
+function request(request) {
+  return new Promise((resolve, reject) => {
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+function percentile(values, fraction) {
+  const sorted = [...values].sort((a, b) => a - b);
+  return sorted[Math.min(sorted.length - 1, Math.ceil(sorted.length * fraction) - 1)];
+}
+
+async function openDatabase() {
+  return new Promise((resolve, reject) => {
+    const open = indexedDB.open(dbName, 1);
+    open.onupgradeneeded = () => {
+      const store = open.result.createObjectStore("records", { keyPath: "mediaKey" });
+      store.createIndex("tweetId", "tweetId", { unique: false });
+      store.createIndex("downloadId", "downloadId", { unique: false });
+    };
+    open.onsuccess = () => resolve(open.result);
+    open.onerror = () => reject(open.error);
+  });
+}
+
+async function seed(db) {
+  const started = performance.now();
+  await new Promise((resolve, reject) => {
+    const tx = db.transaction("records", "readwrite", { durability: "relaxed" });
+    const store = tx.objectStore("records");
+    for (let index = 0; index < count; index += 1) {
+      store.put({
+        schemaVersion: 1,
+        mediaKey: `3_${String(index).padStart(16, "0")}`,
+        tweetId: String(1900000000000000000n + BigInt(Math.floor(index / 4))),
+        jobId: "6ba7b810-9dad-4d80-bccb-4c01b97b67ef",
+        state: "complete",
+        downloadId: index,
+        updatedAt: "2026-08-11T00:00:00.000Z",
+      });
+    }
+    tx.oncomplete = resolve;
+    tx.onabort = () => reject(tx.error);
+    tx.onerror = () => {};
+  });
+  return performance.now() - started;
+}
+
+async function keyLookup(db, key) {
+  const started = performance.now();
+  const tx = db.transaction("records", "readonly");
+  await request(tx.objectStore("records").get(key));
+  return performance.now() - started;
+}
+
+async function reserveAndRestore(db, key) {
+  const started = performance.now();
+  await new Promise((resolve, reject) => {
+    const tx = db.transaction("records", "readwrite");
+    const store = tx.objectStore("records");
+    const get = store.get(key);
+    get.onsuccess = () => store.put({ ...get.result, state: "pending", updatedAt: new Date().toISOString() });
+    get.onerror = () => tx.abort();
+    tx.oncomplete = resolve;
+    tx.onabort = () => reject(tx.error || get.error);
+    tx.onerror = () => {};
+  });
+  return performance.now() - started;
+}
+
+try {
+  const db = await openDatabase();
+  const seedMs = await seed(db);
+  const lookups = [];
+  const reserves = [];
+  for (let index = 0; index < samples; index += 1) {
+    const candidate = Math.floor((index / samples) * count);
+    const key = `3_${String(candidate).padStart(16, "0")}`;
+    lookups.push(await keyLookup(db, key));
+    reserves.push(await reserveAndRestore(db, key));
+  }
+  const estimate = await navigator.storage.estimate();
+  const output = {
+    ok: true,
+    count,
+    samples,
+    seedMs: Number(seedMs.toFixed(1)),
+    lookupP95Ms: Number(percentile(lookups, 0.95).toFixed(3)),
+    reserveUpdateP95Ms: Number(percentile(reserves, 0.95).toFixed(3)),
+    thresholds: { lookupP95Ms: 100, reserveUpdateP95Ms: 250 },
+    withinThresholds: percentile(lookups, 0.95) <= 100 && percentile(reserves, 0.95) <= 250,
+    storageUsage: estimate.usage ?? null,
+    storageQuota: estimate.quota ?? null,
+  };
+  document.querySelector("#result").textContent = JSON.stringify(output);
+  db.close();
+  indexedDB.deleteDatabase(dbName);
+} catch (error) {
+  document.querySelector("#result").textContent = JSON.stringify({ ok: false, count, error: error?.message || String(error) });
+}
+})();
+</script>

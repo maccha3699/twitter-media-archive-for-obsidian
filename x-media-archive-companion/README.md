@@ -1,5 +1,8 @@
 # X Media Archive Companion
 
+このREADMEとコードは、すべてOpenAI GPT-5.6によるバイブコーディングで作成されました。
+This README and all code were created through vibe coding with OpenAI GPT-5.6.
+
 X Media Cloneの完了jobをVaultへ取り込む、Obsidianデスクトップ専用プラグインです。Chrome拡張`X Media Clone`と一組で動作します。ネットワークAPIを一切使わず、X、FxTwitter、oEmbed等へ通信しません。Xのcookieやtokenも読みません。
 
 ## 保存先

@@ -1,0 +1,33 @@
+{
+  "data": {
+    "user": {
+      "result": {
+        "__typename": "User",
+        "rest_id": "777",
+        "legacy": {
+          "screen_name": "profile_author",
+          "name": "Profile Author",
+          "description": "FANBOX and Pixiv",
+          "entities": {
+            "url": {
+              "urls": [
+                {
+                  "expanded_url": "https://profile.example/fanbox"
+                }
+              ]
+            },
+            "description": {
+              "urls": [
+                {
+                  "expanded_url": "https://profile.example/pixiv"
+                }
+              ]
+            }
+          },
+          "location": "Tokyo",
+          "followers_count": 12345
+        }
+      }
+    }
+  }
+}

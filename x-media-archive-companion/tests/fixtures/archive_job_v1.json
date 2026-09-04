@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "jobId": "123e4567-e89b-42d3-a456-426614174000",
+  "mode": "manual",
+  "createdAt": "2025-01-02T03:04:05.000Z",
+  "state": "complete",
+  "posts": [
+    {
+      "tweetId": "1830000000000000000",
+      "tweetUrl": "https://x.example/status/1830000000000000000",
+      "text": "fixture-compatible dummy post",
+      "createdAt": null,
+      "author": {
+        "id": "42",
+        "screenName": "dummy",
+        "displayName": null,
+        "bio": null,
+        "urls": [],
+        "location": "東京",
+        "followers": 1234
+      },
+      "media": [
+        {
+          "mediaKey": "3_fixture",
+          "ordinal": 1,
+          "type": "photo",
+          "extension": "bin",
+          "stagingRelativePath": "staging/dummy.bin",
+          "downloadState": "complete"
+        }
+      ]
+    }
+  ]
+}

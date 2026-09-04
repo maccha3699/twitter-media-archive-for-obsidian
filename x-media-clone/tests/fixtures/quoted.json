@@ -1,0 +1,40 @@
+{
+  "data": {
+    "tweet_results": {
+      "result": {
+        "__typename": "Tweet",
+        "rest_id": "1900000000000000005",
+        "core": {
+          "user_results": {
+            "result": {
+              "__typename": "User",
+              "legacy": { "screen_name": "dave" }
+            }
+          }
+        },
+        "legacy": {},
+        "quoted_status_result": {
+          "result": {
+            "__typename": "Tweet",
+            "rest_id": "1900000000000000006",
+            "core": {
+              "user_results": {
+                "result": {
+                  "__typename": "User",
+                  "legacy": { "screen_name": "erin" }
+                }
+              }
+            },
+            "legacy": {
+              "extended_entities": {
+                "media": [
+                  { "type": "photo", "media_url_https": "https://pbs.twimg.com/media/QuotedPic1.jpg" }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

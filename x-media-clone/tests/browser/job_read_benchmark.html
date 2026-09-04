@@ -1,0 +1,91 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>XMC job read benchmark</title>
+<pre id="result">running</pre>
+<script type="module">
+import { MediaLedger } from "../../lib/ledger.js";
+
+const params = new URLSearchParams(location.search);
+const postCount = Math.max(1, Number(params.get("posts")) || 816);
+const mediaCount = Math.max(1, Number(params.get("media")) || 940);
+const concurrency = Math.max(1, Number(params.get("concurrency")) || 20);
+const dbName = `xmc-job-read-benchmark-${Date.now()}-${crypto.randomUUID()}`;
+
+async function runConcurrent(count, workerCount, operation) {
+  let next = 0;
+  await Promise.all(Array.from({ length: Math.min(count, workerCount) }, async () => {
+    for (;;) {
+      const index = next;
+      next += 1;
+      if (index >= count) return;
+      await operation(index);
+    }
+  }));
+}
+
+function rounded(value) {
+  return Number(value.toFixed(1));
+}
+
+try {
+  const ledger = new MediaLedger({ dbName });
+  const jobId = crypto.randomUUID();
+  const seedStarted = performance.now();
+  await ledger.createJob({ jobId, mode: "bulk" });
+  await runConcurrent(postCount, concurrency, (index) => ledger.appendJobPost(jobId, {
+    tweetId: `tweet-${String(index).padStart(6, "0")}`,
+    text: `synthetic post ${index}`,
+    media: [],
+  }));
+  await runConcurrent(mediaCount, concurrency, (index) => ledger.updateJobMediaDownload(
+    jobId,
+    `media-${String(index).padStart(6, "0")}`,
+    { downloadId: index + 1, state: "complete" },
+  ));
+  const seedMs = performance.now() - seedStarted;
+
+  const fullStarted = performance.now();
+  await runConcurrent(postCount, concurrency, () => ledger.getJob(jobId));
+  const fullMs = performance.now() - fullStarted;
+
+  const headerStarted = performance.now();
+  let lastHeader = null;
+  await runConcurrent(postCount, concurrency, async () => { lastHeader = await ledger.getJobHeader(jobId); });
+  const headerMs = performance.now() - headerStarted;
+
+  const snapshot = await ledger.getJob(jobId);
+  const valid = snapshot.posts.length === postCount
+    && Object.keys(snapshot.media).length === mediaCount
+    && lastHeader?.jobId === jobId
+    && !Object.hasOwn(lastHeader, "posts")
+    && !Object.hasOwn(lastHeader, "media");
+  const withinThresholds = valid && headerMs < fullMs;
+  const estimate = await navigator.storage.estimate();
+  const output = {
+    ok: valid,
+    adapter: "indexeddb",
+    postCount,
+    mediaCount,
+    concurrency,
+    seedMs: rounded(seedMs),
+    fullJobMs: rounded(fullMs),
+    headerMs: rounded(headerMs),
+    speedup: Number((fullMs / headerMs).toFixed(2)),
+    withinThresholds,
+    storageUsage: estimate.usage ?? null,
+    storageQuota: estimate.quota ?? null,
+  };
+  document.querySelector("#result").textContent = JSON.stringify(output);
+
+  const store = await ledger.store();
+  const database = await store.database();
+  database.close();
+  indexedDB.deleteDatabase(dbName);
+} catch (error) {
+  document.querySelector("#result").textContent = JSON.stringify({
+    ok: false,
+    withinThresholds: false,
+    error: error?.message || String(error),
+  });
+}
+</script>

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "jobId": "123e4567-e89b-42d3-a456-426614174000",
+  "mode": "bulk",
+  "state": "complete",
+  "createdAt": "2026-08-11T00:00:00.000Z",
+  "producerHint": "fixture-unknown-field-is-preserved",
+  "posts": [
+    {
+      "tweetId": "1955000000000000001",
+      "tweetUrl": "https://x.com/alice/status/1955000000000000001",
+      "createdAt": "2026-08-10T15:30:45.000Z",
+      "text": "Hello from ArchiveJob v1",
+      "author": {
+        "id": "42",
+        "screenName": "alice",
+        "displayName": "Alice",
+        "bio": null,
+        "urls": ["https://example.invalid/alice"]
+      },
+      "media": [
+        {
+          "mediaKey": "3_1955000000000000001",
+          "ordinal": 1,
+          "type": "photo",
+          "extension": "JPG",
+          "stagingRelativePath": "media/1955000000000000001-01.jpg",
+          "downloadState": "complete",
+          "sourceUrl": "https://pbs.twimg.com/media/example?format=jpg&name=orig"
+        },
+        {
+          "ordinal": 2,
+          "type": "video",
+          "extension": "mp4",
+          "stagingRelativePath": null,
+          "downloadState": "skipped"
+        }
+      ]
+    }
+  ]
+}

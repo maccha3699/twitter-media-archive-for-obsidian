@@ -1,0 +1,56 @@
+{
+  "data": {
+    "tweets": [
+      {
+        "__typename": "Tweet",
+        "rest_id": "1900000000000000201",
+        "core": {
+          "user_results": {
+            "result": {
+              "__typename": "User",
+              "rest_id": "preferred-rest-id",
+              "id": "ignored-id",
+              "legacy": {
+                "screen_name": "legacy_author",
+                "name": "Legacy Display",
+                "description": "Legacy bio",
+                "entities": {
+                  "url": { "urls": [
+                    { "expanded_url": "https://example.invalid/expanded", "url": "https://t.co/ignored" },
+                    { "url": "https://t.co/fallback" }
+                  ] },
+                  "description": { "urls": [{ "expanded_url": "https://example.invalid/in-bio" }] }
+                }
+              }
+            }
+          }
+        },
+        "legacy": { "full_text": "legacy text", "created_at": "Wed Oct 10 20:19:24 +0000 2018" }
+      },
+      {
+        "__typename": "Tweet",
+        "rest_id": "1900000000000000202",
+        "core": {
+          "user_results": {
+            "result": {
+              "__typename": "User",
+              "id": "core-fallback-id",
+              "core": {
+                "screen_name": "core_author",
+                "name": "Core Display",
+                "description": "Core bio",
+                "entities": { "url": { "urls": [{ "expanded_url": "https://example.invalid/core" }] } }
+              }
+            }
+          }
+        },
+        "legacy": { "full_text": "core text", "created_at": "Wed Oct 10 20:19:24 +0000 2018" }
+      },
+      {
+        "__typename": "Tweet",
+        "rest_id": "1900000000000000203",
+        "legacy": { "full_text": "unchanged text", "created_at": "Wed Oct 10 20:19:24 +0000 2018" }
+      }
+    ]
+  }
+}

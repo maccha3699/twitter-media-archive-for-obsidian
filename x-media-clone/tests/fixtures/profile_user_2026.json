@@ -1,0 +1,49 @@
+{
+  "comment": "Shape captured from a live x.com profile response on 2026-08-12. The user node no longer carries a legacy block at all: the bio moved to profile_bio, the place to a location object, and the counts to relationship_counts.",
+  "data": {
+    "user": {
+      "result": {
+        "__typename": "User",
+        "id": "VXNlcjo3Nzg=",
+        "rest_id": "778",
+        "core": {
+          "created_at": "Tue Jul 06 03:16:31 +0000 2021",
+          "name": "Modern Author",
+          "screen_name": "modern_author"
+        },
+        "location": {
+          "location": "依頼の際はwebページ内のFANBOXプロフをご一読下さい"
+        },
+        "relationship_counts": {
+          "followers": 216349,
+          "following": 186
+        },
+        "profile_bio": {
+          "description": "連載始めました。→https://t.co/4Q5qz1X1lH",
+          "entities": {
+            "description": {
+              "urls": [
+                {
+                  "display_url": "youtube.com/channel/UCKICJ…",
+                  "expanded_url": "https://modern.example/youtube",
+                  "indices": [15, 38],
+                  "url": "https://t.co/4Q5qz1X1lH"
+                }
+              ]
+            },
+            "url": {
+              "urls": [
+                {
+                  "display_url": "modern.example",
+                  "expanded_url": "https://modern.example/fanbox",
+                  "indices": [0, 23],
+                  "url": "https://t.co/0EBUxFTmxM"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

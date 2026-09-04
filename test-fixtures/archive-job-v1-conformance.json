@@ -1,0 +1,390 @@
+{
+  "corpusVersion": 1,
+  "cases": [
+    {
+      "name": "minimal-valid-job",
+      "classification": "valid-minimal",
+      "expected": "accept",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-42d3-a456-426614174000",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": [
+          {
+            "tweetId": "1900000000000000001",
+            "tweetUrl": "https://example.invalid/x/status/1900000000000000001",
+            "text": null,
+            "createdAt": null,
+            "author": {
+              "id": "42",
+              "screenName": "synthetic_author",
+              "displayName": null,
+              "bio": null,
+              "urls": [],
+              "location": null,
+              "followers": null
+            },
+            "media": []
+          }
+        ]
+      }
+    },
+    {
+      "name": "reply-tree-valid-job",
+      "classification": "valid-reply-tree",
+      "expected": "accept",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-42d3-a456-426614174001",
+        "mode": "bulk",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": [
+          {
+            "tweetId": "1900000000000000101",
+            "tweetUrl": "https://example.invalid/x/status/1900000000000000101",
+            "text": "synthetic root",
+            "createdAt": "2026-08-19T00:00:00.000Z",
+            "replyToTweetId": null,
+            "replyToUserId": null,
+            "conversationId": "1900000000000000101",
+            "metadataStatus": "complete",
+            "profileMetadataStatus": "observed",
+            "author": {
+              "id": "42",
+              "screenName": "synthetic_author",
+              "displayName": "Synthetic Author",
+              "bio": "offline fixture",
+              "urls": ["https://example.invalid/profile"],
+              "location": "nowhere",
+              "followers": 10
+            },
+            "media": [
+              {
+                "mediaKey": "synthetic-photo-1",
+                "ordinal": 1,
+                "type": "photo",
+                "extension": "jpg",
+                "stagingRelativePath": "media/1900000000000000101-01-synthetic.jpg",
+                "downloadState": "complete"
+              }
+            ],
+            "replyTree": {
+              "rootTweetId": "1900000000000000101",
+              "previousTweetId": null,
+              "nextTweetId": "1900000000000000102",
+              "position": 1,
+              "size": 2,
+              "partial": false
+            }
+          },
+          {
+            "tweetId": "1900000000000000102",
+            "tweetUrl": "https://example.invalid/x/status/1900000000000000102",
+            "text": "synthetic reply",
+            "createdAt": "2026-08-19T00:01:00.000Z",
+            "replyToTweetId": "1900000000000000101",
+            "replyToUserId": "42",
+            "conversationId": "1900000000000000101",
+            "author": {
+              "id": "42",
+              "screenName": "synthetic_author",
+              "displayName": "Synthetic Author",
+              "bio": "offline fixture",
+              "urls": ["https://example.invalid/profile"],
+              "location": "nowhere",
+              "followers": 10
+            },
+            "media": [
+              {
+                "mediaKey": "synthetic-video-2",
+                "ordinal": 1,
+                "type": "video",
+                "extension": "mp4",
+                "stagingRelativePath": null,
+                "downloadState": "skipped"
+              }
+            ],
+            "replyTree": {
+              "rootTweetId": "1900000000000000101",
+              "previousTweetId": "1900000000000000101",
+              "nextTweetId": null,
+              "position": 2,
+              "size": 2,
+              "partial": false
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "unknown-fields-valid-job",
+      "classification": "valid-forward-compatible",
+      "expected": "accept",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-42d3-a456-426614174002",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "futureJobField": "kept-by-producer",
+        "posts": [
+          {
+            "tweetId": "1900000000000000201",
+            "tweetUrl": "https://example.invalid/x/status/1900000000000000201",
+            "text": "unknown fields are allowed",
+            "createdAt": null,
+            "futurePostField": {"revision": 2},
+            "author": {
+              "id": "42",
+              "screenName": "synthetic_author",
+              "displayName": null,
+              "bio": null,
+              "urls": [],
+              "futureAuthorField": true,
+              "location": null,
+              "followers": null
+            },
+            "media": [
+              {
+                "mediaKey": "synthetic-photo-unknown",
+                "ordinal": 1,
+                "type": "photo",
+                "extension": "PNG",
+                "stagingRelativePath": "media/1900000000000000201-01.png",
+                "downloadState": "complete",
+                "futureMediaField": "ignored"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "unknown-schema-version",
+      "classification": "invalid-schema",
+      "expected": "reject",
+      "job": {
+        "schemaVersion": 2,
+        "jobId": "123e4567-e89b-42d3-a456-426614174010",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": []
+      }
+    },
+    {
+      "name": "non-v4-job-id",
+      "classification": "invalid-job-id",
+      "expected": "reject",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-12d3-a456-426614174010",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": []
+      }
+    },
+    {
+      "name": "absolute-staging-path",
+      "classification": "invalid-staging-path",
+      "expected": "reject",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-42d3-a456-426614174011",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": [{"tweetId": "1900000000000000301", "tweetUrl": "https://example.invalid/x/status/1900000000000000301", "text": null, "createdAt": null, "author": {"id": "42", "screenName": "synthetic_author", "displayName": null, "bio": null, "urls": []}, "media": [{"mediaKey": "bad-absolute", "ordinal": 1, "type": "photo", "extension": "jpg", "stagingRelativePath": "/media/file.jpg", "downloadState": "complete"}]}]
+      }
+    },
+    {
+      "name": "drive-staging-path",
+      "classification": "invalid-staging-path",
+      "expected": "reject",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-42d3-a456-426614174012",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": [{"tweetId": "1900000000000000302", "tweetUrl": "https://example.invalid/x/status/1900000000000000302", "text": null, "createdAt": null, "author": {"id": "42", "screenName": "synthetic_author", "displayName": null, "bio": null, "urls": []}, "media": [{"mediaKey": "bad-drive", "ordinal": 1, "type": "photo", "extension": "jpg", "stagingRelativePath": "C:/media/file.jpg", "downloadState": "complete"}]}]
+      }
+    },
+    {
+      "name": "backslash-staging-path",
+      "classification": "invalid-staging-path",
+      "expected": "reject",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-42d3-a456-426614174013",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": [{"tweetId": "1900000000000000303", "tweetUrl": "https://example.invalid/x/status/1900000000000000303", "text": null, "createdAt": null, "author": {"id": "42", "screenName": "synthetic_author", "displayName": null, "bio": null, "urls": []}, "media": [{"mediaKey": "bad-backslash", "ordinal": 1, "type": "photo", "extension": "jpg", "stagingRelativePath": "media\\file.jpg", "downloadState": "complete"}]}]
+      }
+    },
+    {
+      "name": "dot-dot-staging-path",
+      "classification": "invalid-staging-path",
+      "expected": "reject",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-42d3-a456-426614174014",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": [{"tweetId": "1900000000000000304", "tweetUrl": "https://example.invalid/x/status/1900000000000000304", "text": null, "createdAt": null, "author": {"id": "42", "screenName": "synthetic_author", "displayName": null, "bio": null, "urls": []}, "media": [{"mediaKey": "bad-traversal", "ordinal": 1, "type": "photo", "extension": "jpg", "stagingRelativePath": "media/../file.jpg", "downloadState": "complete"}]}]
+      }
+    },
+    {
+      "name": "empty-staging-segment",
+      "classification": "invalid-staging-path",
+      "expected": "reject",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-42d3-a456-426614174015",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": [{"tweetId": "1900000000000000305", "tweetUrl": "https://example.invalid/x/status/1900000000000000305", "text": null, "createdAt": null, "author": {"id": "42", "screenName": "synthetic_author", "displayName": null, "bio": null, "urls": []}, "media": [{"mediaKey": "bad-empty", "ordinal": 1, "type": "photo", "extension": "jpg", "stagingRelativePath": "media//file.jpg", "downloadState": "complete"}]}]
+      }
+    },
+    {
+      "name": "reserved-windows-staging-segment",
+      "classification": "invalid-staging-path",
+      "expected": "reject",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-42d3-a456-426614174016",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": [{"tweetId": "1900000000000000306", "tweetUrl": "https://example.invalid/x/status/1900000000000000306", "text": null, "createdAt": null, "author": {"id": "42", "screenName": "synthetic_author", "displayName": null, "bio": null, "urls": []}, "media": [{"mediaKey": "bad-reserved", "ordinal": 1, "type": "photo", "extension": "jpg", "stagingRelativePath": "media/CON.txt", "downloadState": "complete"}]}]
+      }
+    },
+    {
+      "name": "complete-media-without-staging-path",
+      "classification": "invalid-media-state",
+      "expected": "reject",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-42d3-a456-426614174017",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": [{"tweetId": "1900000000000000307", "tweetUrl": "https://example.invalid/x/status/1900000000000000307", "text": null, "createdAt": null, "author": {"id": "42", "screenName": "synthetic_author", "displayName": null, "bio": null, "urls": []}, "media": [{"mediaKey": "bad-complete-null", "ordinal": 1, "type": "photo", "extension": "jpg", "stagingRelativePath": null, "downloadState": "complete"}]}]
+      }
+    },
+    {
+      "name": "non-decimal-tweet-id",
+      "classification": "invalid-tweet-id",
+      "expected": "reject",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-42d3-a456-426614174018",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": [{"tweetId": "tweet-1900000000000000308", "tweetUrl": "https://example.invalid/x/status/tweet-1900000000000000308", "text": null, "createdAt": null, "author": {"id": "42", "screenName": "synthetic_author", "displayName": null, "bio": null, "urls": []}, "media": []}]
+      }
+    },
+    {
+      "name": "non-decimal-direct-reply-id",
+      "classification": "invalid-reply-id",
+      "expected": "reject",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-42d3-a456-426614174019",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": [{"tweetId": "1900000000000000309", "tweetUrl": "https://example.invalid/x/status/1900000000000000309", "text": null, "createdAt": null, "replyToTweetId": "reply-id", "author": {"id": "42", "screenName": "synthetic_author", "displayName": null, "bio": null, "urls": []}, "media": []}]
+      }
+    },
+    {
+      "name": "invalid-post-metadata-status",
+      "classification": "invalid-metadata",
+      "expected": "reject",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-42d3-a456-426614174020",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": [{"tweetId": "1900000000000000310", "tweetUrl": "https://example.invalid/x/status/1900000000000000310", "text": null, "createdAt": null, "metadataStatus": "unknown", "author": {"id": "42", "screenName": "synthetic_author", "displayName": null, "bio": null, "urls": []}, "media": []}]
+      }
+    },
+    {
+      "name": "reply-tree-outside-job",
+      "classification": "invalid-reply-tree",
+      "expected": "reject",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-42d3-a456-426614174021",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": [{"tweetId": "1900000000000000311", "tweetUrl": "https://example.invalid/x/status/1900000000000000311", "text": null, "createdAt": null, "author": {"id": "42", "screenName": "synthetic_author", "displayName": null, "bio": null, "urls": []}, "media": [], "replyTree": {"rootTweetId": "1900000000000000311", "previousTweetId": null, "nextTweetId": "9999999999999999999", "position": 1, "size": 2, "partial": false}}]
+      }
+    },
+    {
+      "name": "reply-tree-inconsistent-chain",
+      "classification": "invalid-reply-tree",
+      "expected": "reject",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-42d3-a456-426614174022",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": [
+          {"tweetId": "1900000000000000321", "tweetUrl": "https://example.invalid/x/status/1900000000000000321", "text": null, "createdAt": null, "author": {"id": "42", "screenName": "synthetic_author", "displayName": null, "bio": null, "urls": []}, "media": [], "replyTree": {"rootTweetId": "1900000000000000321", "previousTweetId": null, "nextTweetId": null, "position": 1, "size": 2, "partial": false}},
+          {"tweetId": "1900000000000000322", "tweetUrl": "https://example.invalid/x/status/1900000000000000322", "text": null, "createdAt": null, "author": {"id": "42", "screenName": "synthetic_author", "displayName": null, "bio": null, "urls": []}, "media": [], "replyTree": {"rootTweetId": "1900000000000000321", "previousTweetId": "1900000000000000321", "nextTweetId": null, "position": 2, "size": 2, "partial": false}}
+        ]
+      }
+    },
+    {
+      "name": "invalid-author-location-type",
+      "classification": "invalid-author-metadata",
+      "expected": "reject",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-42d3-a456-426614174023",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": [{"tweetId": "1900000000000000323", "tweetUrl": "https://example.invalid/x/status/1900000000000000323", "text": null, "createdAt": null, "author": {"id": "42", "screenName": "synthetic_author", "displayName": null, "bio": null, "urls": [], "location": {"city": "nowhere"}}, "media": []}]
+      }
+    },
+    {
+      "name": "invalid-author-followers-type",
+      "classification": "invalid-author-metadata",
+      "expected": "reject",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-42d3-a456-426614174024",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": [{"tweetId": "1900000000000000324", "tweetUrl": "https://example.invalid/x/status/1900000000000000324", "text": null, "createdAt": null, "author": {"id": "42", "screenName": "synthetic_author", "displayName": null, "bio": null, "urls": [], "followers": "many"}, "media": []}]
+      }
+    },
+    {
+      "name": "unsafe-media-extension",
+      "classification": "invalid-media-extension",
+      "expected": "reject",
+      "job": {
+        "schemaVersion": 1,
+        "jobId": "123e4567-e89b-42d3-a456-426614174025",
+        "mode": "manual",
+        "state": "complete",
+        "createdAt": "2026-08-20T00:00:00.000Z",
+        "posts": [{"tweetId": "1900000000000000325", "tweetUrl": "https://example.invalid/x/status/1900000000000000325", "text": null, "createdAt": null, "author": {"id": "42", "screenName": "synthetic_author", "displayName": null, "bio": null, "urls": []}, "media": [{"mediaKey": "bad-extension", "ordinal": 1, "type": "photo", "extension": "jpeg-image", "stagingRelativePath": "media/1900000000000000325-01.jpg", "downloadState": "complete"}]}]
+      }
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "data": {
+    "home": {
+      "home_timeline_urt": {
+        "instructions": [
+          {
+            "type": "TimelineAddEntries",
+            "entries": [
+              {
+                "entryId": "tweet-1900000000000000001",
+                "content": {
+                  "entryType": "TimelineTimelineItem",
+                  "itemContent": {
+                    "itemType": "TimelineTweet",
+                    "tweet_results": {
+                      "result": {
+                        "__typename": "Tweet",
+                        "rest_id": "1900000000000000001",
+                        "core": {
+                          "user_results": {
+                            "result": {
+                              "__typename": "User",
+                              "legacy": { "screen_name": "alice" }
+                            }
+                          }
+                        },
+                        "legacy": {
+                          "created_at": "Wed Oct 10 20:19:24 +0000 2018",
+                          "full_text": "sample tweet with two photos",
+                          "extended_entities": {
+                            "media": [
+                              { "type": "photo", "media_key": "3_1900000000000000001", "media_url_https": "https://pbs.twimg.com/media/AbCd1234.jpg?tag=1" },
+                              { "type": "photo", "media_key": "3_1900000000000000002", "media_url_https": "https://pbs.twimg.com/media/XyZw5678.png" }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

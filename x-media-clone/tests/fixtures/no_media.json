@@ -1,0 +1,19 @@
+{
+  "data": {
+    "tweet_results": {
+      "result": {
+        "__typename": "Tweet",
+        "rest_id": "1900000000000000007",
+        "core": {
+          "user_results": {
+            "result": {
+              "__typename": "User",
+              "legacy": { "screen_name": "frank" }
+            }
+          }
+        },
+        "legacy": {}
+      }
+    }
+  }
+}

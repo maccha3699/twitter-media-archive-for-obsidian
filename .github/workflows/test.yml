@@ -1,0 +1,36 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: x-media-archive-companion/package-lock.json
+      - name: Test X Media Clone
+        working-directory: x-media-clone
+        run: node --test tests/*.test.js
+      - name: Install Companion dependencies
+        working-directory: x-media-archive-companion
+        run: npm ci
+      - name: Test Companion
+        working-directory: x-media-archive-companion
+        run: npm test
+      - name: Type-check Companion
+        working-directory: x-media-archive-companion
+        run: npm run check
+      - name: Build Companion
+        working-directory: x-media-archive-companion
+        run: npm run build
+      - name: Verify committed build
+        run: git diff --exit-code -- x-media-archive-companion/main.js

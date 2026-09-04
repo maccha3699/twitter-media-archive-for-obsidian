@@ -1,0 +1,80 @@
+{
+  "comment": "Shape captured from a live x.com profile timeline on 2026-08-12. The retweet wrapper is itself __typename Tweet, carries the retweeter as its author, and mirrors the original's extended_entities onto its own legacy -- which is why normalizing the wrapper archives someone else's media under the retweeter.",
+  "data": {
+    "user": {
+      "result": {
+        "timeline": {
+          "instructions": [
+            {
+              "type": "TimelineAddEntries",
+              "entries": [
+                {
+                  "content": {
+                    "itemContent": {
+                      "tweet_results": {
+                        "result": {
+                          "__typename": "Tweet",
+                          "rest_id": "2084914663205339319",
+                          "core": {
+                            "user_results": {
+                              "result": {
+                                "__typename": "User",
+                                "rest_id": "1329417846967783425",
+                                "core": { "name": "Retweeter", "screen_name": "retweeter_acct" }
+                              }
+                            }
+                          },
+                          "legacy": {
+                            "created_at": "Wed Aug 12 09:15:00 +0000 2026",
+                            "full_text": "RT @original_acct: 作品です https://t.co/mirrored",
+                            "extended_entities": {
+                              "media": [
+                                {
+                                  "media_key": "3_9001",
+                                  "type": "photo",
+                                  "media_url_https": "https://pbs.twimg.example/media/MIRRORED.jpg"
+                                }
+                              ]
+                            },
+                            "retweeted_status_result": {
+                              "result": {
+                                "__typename": "Tweet",
+                                "rest_id": "2084907004540465202",
+                                "core": {
+                                  "user_results": {
+                                    "result": {
+                                      "__typename": "User",
+                                      "rest_id": "555000111",
+                                      "core": { "name": "Original", "screen_name": "original_acct" }
+                                    }
+                                  }
+                                },
+                                "legacy": {
+                                  "created_at": "Wed Aug 12 08:44:00 +0000 2026",
+                                  "full_text": "作品です https://t.co/mirrored",
+                                  "extended_entities": {
+                                    "media": [
+                                      {
+                                        "media_key": "3_9001",
+                                        "type": "photo",
+                                        "media_url_https": "https://pbs.twimg.example/media/MIRRORED.jpg"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

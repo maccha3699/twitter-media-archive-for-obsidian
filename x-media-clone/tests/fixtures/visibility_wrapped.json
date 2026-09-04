@@ -1,0 +1,21 @@
+{
+  "data": {
+    "tweet_results": {
+      "result": {
+        "__typename": "TweetWithVisibilityResults",
+        "tweet": {
+          "rest_id": "1900000000000000004",
+          "core": {
+            "user_results": {
+              "result": {
+                "__typename": "User",
+                "legacy": { "screen_name": "carol" }
+              }
+            }
+          },
+          "legacy": {}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "data": {
+    "user": {
+      "result": {
+        "__typename": "User",
+        "timeline_v2": {
+          "timeline": {
+            "instructions": [
+              {
+                "type": "TimelineAddEntries",
+                "entries": [
+                  {
+                    "entryId": "tweet-1900000000000000101",
+                    "content": {
+                      "entryType": "TimelineTimelineItem",
+                      "itemContent": {
+                        "itemType": "TimelineTweet",
+                        "tweet_results": {
+                          "result": {
+                            "__typename": "TweetWithVisibilityResults",
+                            "tweet": {
+                              "rest_id": "1900000000000000101",
+                              "core": {
+                                "user_results": {
+                                  "result": {
+                                    "__typename": "User",
+                                    "legacy": { "screen_name": "mallory" }
+                                  }
+                                }
+                              },
+                              "legacy": {
+                                "created_at": "Wed Oct 10 20:19:24 +0000 2018",
+                                "full_text": "sensitive media tweet one",
+                                "extended_entities": {
+                                  "media": [
+                                    { "type": "photo", "media_url_https": "https://pbs.twimg.com/media/UserMedia101.jpg" }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "entryId": "tweet-1900000000000000102",
+                    "content": {
+                      "entryType": "TimelineTimelineItem",
+                      "itemContent": {
+                        "itemType": "TimelineTweet",
+                        "tweet_results": {
+                          "result": {
+                            "__typename": "TweetWithVisibilityResults",
+                            "tweet": {
+                              "rest_id": "1900000000000000102",
+                              "core": {
+                                "user_results": {
+                                  "result": {
+                                    "__typename": "User",
+                                    "legacy": { "screen_name": "mallory" }
+                                  }
+                                }
+                              },
+                              "legacy": {
+                                "created_at": "Wed Oct 10 20:20:24 +0000 2018",
+                                "full_text": "sensitive media tweet two",
+                                "extended_entities": {
+                                  "media": [
+                                    { "type": "photo", "media_url_https": "https://pbs.twimg.com/media/UserMedia102a.jpg" },
+                                    { "type": "photo", "media_url_https": "https://pbs.twimg.com/media/UserMedia102b.jpg" }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "entryId": "tweet-1900000000000000103",
+                    "content": {
+                      "entryType": "TimelineTimelineItem",
+                      "itemContent": {
+                        "itemType": "TimelineTweet",
+                        "tweet_results": {
+                          "result": {
+                            "__typename": "TweetWithVisibilityResults",
+                            "tweet": {
+                              "rest_id": "1900000000000000103",
+                              "core": {
+                                "user_results": {
+                                  "result": {
+                                    "__typename": "User",
+                                    "legacy": { "screen_name": "mallory" }
+                                  }
+                                }
+                              },
+                              "legacy": {
+                                "created_at": "Wed Oct 10 20:21:24 +0000 2018",
+                                "full_text": "sensitive media tweet three",
+                                "extended_entities": {
+                                  "media": [
+                                    { "type": "video", "video_info": { "variants": [
+                                      { "bitrate": 800000, "content_type": "video/mp4", "url": "https://video.twimg.com/UserMedia103.mp4" }
+                                    ] } }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

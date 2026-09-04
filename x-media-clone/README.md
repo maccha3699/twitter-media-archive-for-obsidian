@@ -1,5 +1,8 @@
 # X Media Clone
 
+このREADMEとコードは、すべてOpenAI GPT-5.6によるバイブコーディングで作成されました。
+This README and all code were created through vibe coding with OpenAI GPT-5.6.
+
 Xの表示済み投稿から画像・動画を保存し、Obsidian Companionへローカルjobを渡すChrome MV3拡張です。`X Media Archive Companion`と一組で動作します。複数のXログインアカウントを同じChromeプロファイルで切り替えても、同じIndexedDB台帳と保存先を使います。
 
 ## 操作

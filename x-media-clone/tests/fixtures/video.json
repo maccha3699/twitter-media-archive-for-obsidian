@@ -1,0 +1,35 @@
+{
+  "data": {
+    "tweet_results": {
+      "result": {
+        "__typename": "Tweet",
+        "rest_id": "1900000000000000002",
+        "core": {
+          "user_results": {
+            "result": {
+              "__typename": "User",
+              "legacy": { "screen_name": "bob" }
+            }
+          }
+        },
+        "legacy": {
+          "extended_entities": {
+            "media": [
+              {
+                "type": "video",
+                "media_url_https": "https://pbs.twimg.com/amplify_video_thumb/123/img/thumb.jpg",
+                "video_info": {
+                  "variants": [
+                    { "content_type": "application/x-mpegURL", "url": "https://video.twimg.com/ext_tw_video/123/pu/pl/playlist.m3u8" },
+                    { "bitrate": 832000, "content_type": "video/mp4", "url": "https://video.twimg.com/ext_tw_video/123/pu/vid/480x270/low.mp4" },
+                    { "bitrate": 2176000, "content_type": "video/mp4", "url": "https://video.twimg.com/ext_tw_video/123/pu/vid/1280x720/high.mp4" }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

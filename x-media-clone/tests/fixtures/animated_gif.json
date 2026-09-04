@@ -1,0 +1,33 @@
+{
+  "data": {
+    "tweet_results": {
+      "result": {
+        "__typename": "Tweet",
+        "rest_id": "1900000000000000003",
+        "core": {
+          "user_results": {
+            "result": {
+              "__typename": "User",
+              "legacy": { "screen_name": "carla" }
+            }
+          }
+        },
+        "legacy": {
+          "extended_entities": {
+            "media": [
+              {
+                "type": "animated_gif",
+                "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/gif_thumb.jpg",
+                "video_info": {
+                  "variants": [
+                    { "bitrate": 0, "content_type": "video/mp4", "url": "https://video.twimg.com/tweet_video/abc123.mp4" }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
