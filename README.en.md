@@ -4,7 +4,7 @@
 
 All README documentation and code in this repository were created through vibe coding with OpenAI GPT-5.6.
 
-The suite combines the **X Media Collector (XMC)** Chrome extension and the **X Media Archive Companion** Obsidian plugin to save visible X posts and media into a local Obsidian Vault.
+This tool downloads media from visible posts on X (formerly Twitter) and saves it into a local Obsidian Vault. It combines the **X Media Collector (XMC)** Chrome extension and the **X Media Archive Companion** Obsidian plugin.
 
 This is a public preview for Windows, Chrome 111 or later, and Obsidian Desktop 1.5 or later.
 
