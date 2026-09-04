@@ -37,8 +37,8 @@ After an update, reload the extension from `chrome://extensions`, reload open X 
 ## Usage
 
 1. Save one post with the save button added to posts on X. For bulk saving, open the target profile's `/media` page and choose **一括DL** → **開始**.
-2. In Obsidian, select the download icon in the gallery header or run `Import pending jobs` from the Command Palette.
-3. Open the viewer from the image icon in Obsidian's left ribbon or run `Open archive gallery`.
+2. Open the viewer from the image icon in Obsidian's left ribbon or run `Open archive gallery`.
+3. Import pending jobs with the `Import pending X Media jobs` download icon in the viewer header.
 4. Select an author card to open its posts. Use the search button in the header to search all saved notes.
 5. Right-click a post or author card to delete it. To download deleted content again, enable **保存済みも再取得する** in the bulk-download dialog.
 6. Run `Reconcile pending jobs` when an I/O failure leaves a retryable job.
