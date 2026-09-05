@@ -2,7 +2,7 @@
 
 [English](README.en.md)
 
-https://github.com/maccha3699/x-media-archive-suite/blob/main/download.png
+(blob/main/download.png)
 
 本リポジトリのREADMEとコードは、すべてOpenAI GPT-5.6によるバイブコーディングで作成されました。
 
