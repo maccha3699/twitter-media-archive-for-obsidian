@@ -199,9 +199,9 @@ export class XmcGalleryView extends ItemView {
   getViewType(): string { return VIEW_TYPE_XMC_GALLERY; }
   getIcon(): string { return "images"; }
   getDisplayText(): string {
-    if (this.viewState.mode === "author" && this.viewState.folder) return `X Media: ${this.viewState.folder}`;
-    if (this.viewState.mode === "favorites") return "X Media: お気に入り";
-    return this.viewState.mode === "allPosts" ? "X Media: 全保存ノート検索" : "X Media Archive";
+    if (this.viewState.mode === "author" && this.viewState.folder) return `Twitter Media: ${this.viewState.folder}`;
+    if (this.viewState.mode === "favorites") return "Twitter Media: お気に入り";
+    return this.viewState.mode === "allPosts" ? "Twitter Media: 全保存ノート検索" : "Twitter Media Archive";
   }
 
   getState(): Record<string, unknown> { return { ...this.viewState }; }
@@ -248,7 +248,7 @@ export class XmcGalleryView extends ItemView {
     refresh.addEventListener("click", () => { this.render(); });
     const importPending = this.barEl.createEl("button", {
       cls: "xmc-gallery-import-pending",
-      attr: { "aria-label": "保留中のX Mediaジョブをインポート", title: "Import pending X Media jobs" },
+      attr: { "aria-label": "保留中のTwitterメディアジョブをインポート", title: "Import pending Twitter media jobs" },
     });
     setIcon(importPending, "download");
     importPending.addEventListener("click", () => { void this.host.importPending(false); });

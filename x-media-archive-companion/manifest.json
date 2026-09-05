@@ -1,9 +1,9 @@
 {
   "id": "x-media-archive-companion",
-  "name": "X Media Archive Companion",
+  "name": "Twitter Media Archive Companion",
   "version": "0.1.0",
   "minAppVersion": "1.5.0",
-  "description": "Offline desktop importer for completed X Media Collector archive jobs.",
+  "description": "Offline desktop importer for completed Twitter Media Collector archive jobs.",
   "author": "maccha3699",
   "isDesktopOnly": true
 }

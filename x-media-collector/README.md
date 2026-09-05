@@ -1,9 +1,9 @@
-# X Media Collector
+# Twitter Media Collector
 
 このREADMEとコードは、すべてOpenAI GPT-5.6によるバイブコーディングで作成されました。
 This README and all code were created through vibe coding with OpenAI GPT-5.6.
 
-Xの表示済み投稿から画像・動画を保存し、Obsidian Companionへローカルjobを渡すChrome MV3拡張です。`X Media Archive Companion`と一組で動作します。複数のXログインアカウントを同じChromeプロファイルで切り替えても、同じIndexedDB台帳と保存先を使います。
+Twitter（現X）の表示済み投稿から画像・動画を保存し、Obsidian Companionへローカルjobを渡すChrome MV3拡張です。`Twitter Media Archive Companion`と一組で動作します。複数のTwitterログインアカウントを同じChromeプロファイルで切り替えても、同じIndexedDB台帳と保存先を使います。
 
 ## 操作
 
@@ -93,4 +93,4 @@ node tests/browser/run_job_read_benchmark.mjs
 - `sw.js`: Chrome downloads、完了追跡、manifest、Obsidian URI。
 - `content_main.js`: X上のボタン、一括モーダル、進捗表示。
 
-XのDOM/GraphQL形状が変わった場合も、保存・台帳・manifest契約へ直接X依存を持ち込まないでください。
+Twitter（現X）のDOM/GraphQL形状が変わった場合も、保存・台帳・manifest契約へ直接サービス固有の依存を持ち込まないでください。

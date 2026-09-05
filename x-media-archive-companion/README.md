@@ -1,9 +1,9 @@
-# X Media Archive Companion
+# Twitter Media Archive Companion
 
 このREADMEとコードは、すべてOpenAI GPT-5.6によるバイブコーディングで作成されました。
 This README and all code were created through vibe coding with OpenAI GPT-5.6.
 
-X Media Collectorの完了jobをVaultへ取り込む、Obsidianデスクトップ専用プラグインです。Chrome拡張`X Media Collector`と一組で動作します。ネットワークAPIを一切使わず、X、FxTwitter、oEmbed等へ通信しません。Xのcookieやtokenも読みません。
+Twitter Media Collectorの完了jobをVaultへ取り込む、Obsidianデスクトップ専用プラグインです。Chrome拡張`Twitter Media Collector`と一組で動作します。ネットワークAPIを一切使わず、Twitter（現X）、FxTwitter、oEmbed等へ通信しません。Twitterのcookieやtokenも読みません。
 
 ## 保存先
 
@@ -30,7 +30,7 @@ GridExplorerはフォルダノートの frontmatter を投稿フォルダの表�
 - 全保存ノート検索: ヘッダーの検索ボタンから開く。全投稿者の投稿タイトル・tweet ID・投稿者と、プロフィールの表示名・現在／過去screenName・所在地・展開済みURLを横断検索する。`pixiv` や `booth` でURLを持つプロフィールを探せる
 - 投稿ノート: 新規生成する通常投稿は投稿部分の左側へテーマのアクセントカラー縦線を表示する。返信ツリーは各投稿ごとに独立した縦線を表示する。メディア用の末尾`https://t.co/...`は重複表示せず、Original URLは各投稿部分の末尾へ置く
 - 投稿者導線: 新規生成する通常投稿・返信ツリーの本文には「投稿者プロフィール」「このユーザーの投稿フォルダ」を表示しない。プロフィールノートと投稿者フォルダ入口自体は維持し、リンク生成は将来個別に再有効化できる独立箇所へ隔離する
-- プロパティ表示: 投稿・プロフィールではObsidian標準の上側プロパティを隠し、読み取りビューとライブプレビューの本文末尾だけへ表示する。同じ内容のXMC専用ビューを右サイドバーへ自動展開し、対象ノートにフォーカスがある間だけ表示する。キーと値は通常のテキストとして選択・コピーできる
+- プロパティ表示: 投稿・プロフィールではObsidian標準の上側プロパティを隠し、読み取りビューとライブプレビューの本文末尾だけへ表示する。同じ内容のTwitter Media専用ビューを右サイドバーへ自動展開し、対象ノートにフォーカスがある間だけ表示する。キーと値は通常のテキストとして選択・コピーできる
 - 投稿者単位削除: 投稿者カードの右クリック直後に確認画面を開き、安全確認の進行後に投稿者名、ノート数、メディア数、receipt数を表示する。確認チェック後だけ投稿者フォルダ・投稿者カード・専有メディアをまとめてゴミ箱へ移す。外部ノートが参照中のメディアは残し、複数投稿者を含むreceiptは対象投稿だけを除く
 - 単一投稿削除: 投稿ノートと専有メディアをVault内stageへ移し、対象notePathを持つ全receipt entryと投稿者カードを更新してからゴミ箱へ送る。trash前の失敗は元bytesへrollbackし、共有・索引未確定メディアは残す
 
@@ -42,7 +42,7 @@ GridExplorerはフォルダノートの frontmatter を投稿フォルダの表�
 
 ## 公開配布向けnote移行
 
-`scripts/public-distribution-migration.ts`は既存XMC投稿／返信ツリーへ所有markerを一度だけ追加します。path/registry異常はmanual reviewとして停止し、自動renameしません。artifactはGit除外済みprivate runへ置きます。
+`scripts/public-distribution-migration.ts`は既存Twitter Media投稿／返信ツリーへ所有markerを一度だけ追加します。path/registry異常はmanual reviewとして停止し、自動renameしません。artifactはGit除外済みprivate runへ置きます。
 
 ```powershell
 npm run migration:public -- scan --archive C:\path\to\vault\XMediaArchive --out C:\private-run\scan.json
@@ -58,7 +58,7 @@ GridExplorer用のフォルダノートは残してあるので、GridExplorer�
 
 ## 既存投稿ノートの旧導線を除去する
 
-`scripts/post-navigation-cleanup.ts` は、XMC投稿ノートのfrontmatter直後にある、対象投稿者自身への
+`scripts/post-navigation-cleanup.ts` は、Twitter Media投稿ノートのfrontmatter直後にある、対象投稿者自身への
 「投稿者プロフィール」「このユーザーの投稿フォルダ」の完全一致行だけを除去します。本文中の同じ語、
 frontmatter、投稿本文、メディアembed、返信ツリー、プロフィールノート、投稿者フォルダ入口は変更しません。
 
@@ -78,7 +78,7 @@ npm run cleanup:navigation -- verify --archive C:\path\to\vault\XMediaArchive --
 
 - 取込はユーザー操作で行う。常時監視はしない（ChromeからObsidianも開かない）
 - 回復用URI: `obsidian://x-media-archive-import?vault=obsidian&job=<UUIDv4>`
-- ギャラリーヘッダーのダウンロードアイコン: `Import pending X Media jobs`
+- ギャラリーヘッダーのダウンロードアイコン: `Import pending Twitter media jobs`
 - コマンド: `Import pending jobs`
 - コマンド: `Reconcile pending jobs`
 - コマンド: `Refresh account index`
@@ -93,7 +93,7 @@ stagingメディアの削除は、receiptが「書いた」と主張する成果
 
 欠損の発生時点はノートと診断ログの両方で区別できます。
 
-- `download-failed` / 分類 `media-download-failed`: XMCがXから取得できなかった。manifestに記録された理由も併記される
+- `download-failed` / 分類 `media-download-failed`: CollectorがTwitter（現X）から取得できなかった。manifestに記録された理由も併記される
 - `import-lost` / 分類 `media-import-lost`: 取得済みだがVaultに届かなかった
 
 各取込後、影響した投稿者のアカウントカードと投稿フォルダ入口を1回だけ更新します。既存分は`Refresh account index`で一括更新できます。カードの代表画像は画像をデコードせず、最初に選んだ静止画のVault pathを`cover_media`へ固定します。

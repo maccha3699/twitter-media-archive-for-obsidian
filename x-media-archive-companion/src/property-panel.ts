@@ -34,7 +34,7 @@ export class XmcPropertyView extends ItemView {
 
   constructor(leaf: WorkspaceLeaf, host: PropertyHost) { super(leaf); this.host = host; }
   getViewType(): string { return VIEW_TYPE_XMC_PROPERTIES; }
-  getDisplayText(): string { return "XMC プロパティ"; }
+  getDisplayText(): string { return "Twitter Media プロパティ"; }
   getIcon(): string { return "list-tree"; }
   getState(): Record<string, unknown> { return { path: this.filePath }; }
   async setState(state: unknown, result: { history: boolean }): Promise<void> {

@@ -1,4 +1,4 @@
-// Durable, media-keyed ledger for X Media Collector.
+// Durable, media-keyed ledger for Twitter Media Collector.
 //
 // The browser implementation uses IndexedDB.  The memory store is deliberately
 // exported only as a deterministic test/diagnostic adapter; both stores expose

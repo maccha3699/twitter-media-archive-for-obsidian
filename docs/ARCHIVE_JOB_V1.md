@@ -1,6 +1,6 @@
 # ArchiveJob v1
 
-X Media Collector（producer）とX Media Archive Companion（consumer）の唯一の受渡し契約です。
+Twitter Media Collector（producer）とTwitter Media Archive Companion（consumer）の唯一の受渡し契約です。
 
 ## Job
 
@@ -73,7 +73,7 @@ producerは全chunk完了後にmarkerを最後に公開します。consumerはma
 
 ## Receipt
 
-Companionは `XMediaArchive/_system/receipts/<jobId>.json` を原子的に書きます。receiptはjob状態、postごとのnotePath、mediaKey、ordinal、`complete | partial`、vaultPathまたはerrorを保持します。XMCはreceipt配列からIndexedDB台帳を明示再構築できます。
+Companionは `XMediaArchive/_system/receipts/<jobId>.json` を原子的に書きます。receiptはjob状態、postごとのnotePath、mediaKey、ordinal、`complete | partial`、vaultPathまたはerrorを保持します。Collectorはreceipt配列からIndexedDB台帳を明示再構築できます。
 
 ## 冪等性
 

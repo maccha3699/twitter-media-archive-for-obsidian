@@ -17,7 +17,7 @@ jobs:
           node-version: 24
           cache: npm
           cache-dependency-path: x-media-archive-companion/package-lock.json
-      - name: Test X Media Collector
+      - name: Test Twitter Media Collector
         working-directory: x-media-collector
         run: node --test tests/*.test.js
       - name: Install Companion dependencies

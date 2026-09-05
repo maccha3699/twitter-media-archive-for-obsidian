@@ -86,14 +86,14 @@ export default class XMediaArchiveCompanion extends Plugin {
       for (const timer of this.propertyTimers) window.clearTimeout(timer);
       this.propertyTimers.clear();
     });
-    this.addRibbonIcon("images", "X Media Archive を開く", () => { void activateGalleryView(this); });
+    this.addRibbonIcon("images", "Twitter Media Archive を開く", () => { void activateGalleryView(this); });
     this.addCommand({ id: "open-gallery", name: "Open archive gallery", callback: () => { void activateGalleryView(this); } });
     this.addCommand({ id: "import-pending-jobs", name: "Import pending jobs", callback: () => this.importPending(false) });
     this.addCommand({ id: "reconcile-pending-jobs", name: "Reconcile pending jobs", callback: () => this.importPending(true) });
     this.addCommand({ id: "refresh-account-index", name: "Refresh account index", callback: async () => {
-      if (!this.beginArchiveMutation("account-refresh")) { new Notice("XMC archive update is already running."); return; }
-      try { const count = await this.importer.refreshExistingAccounts(this.vaultBasePath(), this.settings.vaultRoot); new Notice(`XMC account index: ${count} users refreshed.`); }
-      catch (error) { const diagnostic = safeErrorDiagnostic(error); this.log("account-index-failed", diagnostic); new Notice(`XMC account index failed (${diagnostic.category}).`); }
+      if (!this.beginArchiveMutation("account-refresh")) { new Notice("Twitter Media archive update is already running."); return; }
+      try { const count = await this.importer.refreshExistingAccounts(this.vaultBasePath(), this.settings.vaultRoot); new Notice(`Twitter Media account index: ${count} users refreshed.`); }
+      catch (error) { const diagnostic = safeErrorDiagnostic(error); this.log("account-index-failed", diagnostic); new Notice(`Twitter Media account index failed (${diagnostic.category}).`); }
       finally { this.endArchiveMutation("account-refresh"); }
     } });
     this.registerObsidianProtocolHandler("x-media-archive-import", async (parameters) => {
@@ -101,11 +101,11 @@ export default class XMediaArchiveCompanion extends Plugin {
       const jobId = uriJobId(parameters);
       if (!jobId) {
         this.log("uri-rejected", safeUriDiagnostic(parameters));
-        new Notice(`X Media Archive Companion rejected an invalid import URI. See ${this.diagnostics.relativePath}`);
+        new Notice(`Twitter Media Archive Companion rejected an invalid import URI. See ${this.diagnostics.relativePath}`);
         return;
       }
       this.log("uri-accepted", { jobId });
-      if (!this.beginArchiveMutation("import")) { new Notice("XMC archive update is already running."); return; }
+      if (!this.beginArchiveMutation("import")) { new Notice("Twitter Media archive update is already running."); return; }
       try { await this.importOne(jobId, false); }
       finally { this.endArchiveMutation("import"); }
     });
@@ -250,15 +250,15 @@ export default class XMediaArchiveCompanion extends Plugin {
     return localVaultBasePath(this.app.vault.adapter);
   }
   async importPending(reconcileOnly: boolean): Promise<void> {
-    if (this.scanRunning) { new Notice("XMC import is already running."); return; }
-    if (!this.beginArchiveMutation("import")) { new Notice("XMC archive update is already running."); return; }
+    if (this.scanRunning) { new Notice("Twitter Media import is already running."); return; }
+    if (!this.beginArchiveMutation("import")) { new Notice("Twitter Media archive update is already running."); return; }
     this.scanRunning = true;
     const inbox = expandHome(this.settings.inboxPath);
     let ids: string[];
     try { ids = await listCompletedJobDirectories(diskFs, inbox); }
     catch (error) {
       this.log("pending-list-failed", safeErrorDiagnostic(error));
-      new Notice(`Cannot read XMC inbox (${safeErrorDiagnostic(error).category}). See ${this.diagnostics.relativePath}`);
+      new Notice(`Cannot read Twitter Media inbox (${safeErrorDiagnostic(error).category}). See ${this.diagnostics.relativePath}`);
       this.scanRunning = false;
       this.endArchiveMutation("import");
       return;
@@ -274,7 +274,7 @@ export default class XMediaArchiveCompanion extends Plugin {
       this.scanRunning = false;
       this.endArchiveMutation("import");
     }
-    new Notice(`XMC import: ${imported} complete, ${partial} need repair.`);
+    new Notice(`Twitter Media import: ${imported} complete, ${partial} need repair.`);
   }
   private async importOne(jobId: string, reconcileOnly: boolean): Promise<"complete" | "partial" | "skipped"> {
     const inbox = expandHome(this.settings.inboxPath);
@@ -309,7 +309,7 @@ export default class XMediaArchiveCompanion extends Plugin {
     } catch (error) {
       const diagnostic = safeErrorDiagnostic(error);
       this.log("import-failed", { jobId, ...diagnostic });
-      new Notice(`XMC job ${jobId} failed (${diagnostic.category}). See ${this.diagnostics.relativePath}`);
+      new Notice(`Twitter Media job ${jobId} failed (${diagnostic.category}). See ${this.diagnostics.relativePath}`);
       return "partial";
     }
   }
@@ -345,7 +345,7 @@ class XmcSettingTab extends PluginSettingTab {
     const { containerEl } = this;
     containerEl.empty();
     containerEl.createEl("p", { text: "Desktop-only local importer. It performs no network requests.", cls: "xmc-companion-setting-note" });
-    new Setting(containerEl).setName("Job inbox").setDesc("Completed XMC ArchiveJob folders. Default: ~/Downloads/XMediaClone/_jobs").addText((text) => text.setValue(this.plugin.settings.inboxPath).onChange(async (value) => { this.plugin.settings.inboxPath = value.trim() || DEFAULT_SETTINGS.inboxPath; await this.plugin.saveSettings(); }));
+    new Setting(containerEl).setName("Job inbox").setDesc("Completed Twitter Media ArchiveJob folders. Default: ~/Downloads/XMediaClone/_jobs").addText((text) => text.setValue(this.plugin.settings.inboxPath).onChange(async (value) => { this.plugin.settings.inboxPath = value.trim() || DEFAULT_SETTINGS.inboxPath; await this.plugin.saveSettings(); }));
     new Setting(containerEl).setName("Vault root").setDesc("Vault-relative archive destination.").addText((text) => text.setValue(this.plugin.settings.vaultRoot).onChange(async (value) => { this.plugin.settings.vaultRoot = value.replace(/\\/g, "/").replace(/^\/+/, "") || DEFAULT_SETTINGS.vaultRoot; await this.plugin.saveSettings(); }));
   }
 }
