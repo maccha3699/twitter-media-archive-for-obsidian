@@ -2,6 +2,8 @@
 
 [English](README.en.md)
 
+https://github.com/maccha3699/x-media-archive-suite/blob/main/download.png
+
 本リポジトリのREADMEとコードは、すべてOpenAI GPT-5.6によるバイブコーディングで作成されました。
 
 Twitter（現:X）のツイート(現:ポスト)からメディアをダウンロードし、ローカルのObsidian Vaultへ保存するツールです。Chrome拡張 **X Media Collector（XMC）** とObsidianプラグイン **X Media Archive Companion** を一組で使用します。
