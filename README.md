@@ -2,7 +2,7 @@
 
 [English](README.en.md)
 
-(blob/main/download.png)
+(download.png)
 
 本リポジトリのREADMEとコードは、すべてOpenAI GPT-5.6によるバイブコーディングで作成されました。
 
