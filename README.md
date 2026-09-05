@@ -1,4 +1,4 @@
-# X Media Archive Suite
+# X Media Archive Suite for Cosense
 
 [English](README.en.md)
 
