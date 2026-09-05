@@ -2,6 +2,7 @@
 
 [English](README.en.md)
 
+![X Media Archiveの投稿者一覧](download.png)
 
 本リポジトリのREADMEとコードは、すべてOpenAI GPT-5.6によるバイブコーディングで作成されました。
 
